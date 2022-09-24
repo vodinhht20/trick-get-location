@@ -1,5 +1,8 @@
 <?php
 
+use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\Auth\AuthController;
+use App\Http\Controllers\Home\HomeController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,6 +16,12 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Route::get('/', [HomeController::class, 'index'])->name('home');
+Route::get('/login', [AuthController::class, 'loginForm'])->name('login');
+Route::get('/signup', [AuthController::class, 'signupForm'])->name('signup');
+Route::get('/reset-password', [AuthController::class, 'resetPassForm'])->name('resetPass');
+
+Route::prefix('/admin')->group(function () {
+    Route::get('/', [AdminController::class, 'dashboard'])->name('dashboard');
+    Route::get('/history-pay', [AdminController::class, 'historyPay'])->name('historyPay');
 });

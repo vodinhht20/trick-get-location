@@ -28,6 +28,12 @@
                 </li>
 
                 <li>
+                    <a href="{{ route('test') }}" class="waves-effect {{ Request::routeIs('test') ? 'active' : '' }}">
+                        <i class="ri-store-line"></i>
+                        <span>test</span>
+                    </a>
+                </li>
+                <li>
                     <a href="{{ route('historyPay') }}" class="waves-effect {{ Request::routeIs('historyPay') ? 'active' : '' }}">
                         <i class="ri-history-line"></i><span class="badge rounded-pill bg-success float-end">1</span>
                         <span>Lịch sử giao dịch</span>

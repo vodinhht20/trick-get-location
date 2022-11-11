@@ -13,4 +13,9 @@ class AdminController extends Controller
     public function historyPay(Request $request){
         return view('cpanel.historypay');
     }
+
+    public function test()
+    {
+        return view("cpanel.test");
+    }
 }
